@@ -9,6 +9,7 @@
 
 #### 1. 启动服务
 
+    npm i
     npm run start
 
 #### 2. 目录介绍

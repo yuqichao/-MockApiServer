@@ -6,6 +6,7 @@ const api = require("./api/index.js");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', api);
+app.use(express.static('public'));
 
 app.listen(2333, () => {
     console.log("MockAPI Server Run On：http://localhost:2333");
