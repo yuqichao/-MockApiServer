@@ -1,20 +1,19 @@
-const mock = require("mockjs");
+const Mock = require("mockjs");
 module.exports = [
     {
-        url: "/",
+        url: "/info",
         method: "get",
         fn: (req, res) => {
-            res.send("order")
-        }
-    },
-    {
-        url: "/login",
-        method: "get",
-        fn: (req, res) => {
-            let data = mock.mock({
-                'list|1-10': [{
-                    'id|+1': 1
-                }]
+            let data = Mock.mock({
+                "uid|1-200": 1,
+                "coupons|3": [
+                    "满100减10"
+                ],
+                "addr": Mock.Random.ctitle(4,14),
+                "activity": {
+                    "url": Mock.Random.image("750x200"),
+                    "id|0-200": 1
+                }
             });
             res.send(data);
         }

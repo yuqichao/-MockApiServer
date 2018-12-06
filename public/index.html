@@ -7,15 +7,46 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>2222</h1>
+    <h6 class="h">2222</h6>
     <button class="click">点击我</button>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
-<script>
-document.querySelector(".click").addEventListener("click", function(){
-    wx.miniProgram.switchTab({
-        url: "/pages/tabBar/my/my"
-    });
-},false);
-</script>
+    <script>
+        var local = window.location;
+        var url = local.origin + local.pathname;
+        function query() {
+            var map = {};
+            if(local.search.length == 0) return map;
+            var l = local.search.replace("?", '').split("&");
+            for(var i = 0, len = l.length; i < len; i++) {
+                var item = l[i].split("=");
+                map[item[0]] = item[1];
+            }
+            return map;
+        }
+
+        function search(data) {
+            var str  = "?";
+            for(var i in data) {
+                str += i + "=" + data[i] + "&";
+            }
+            return str.slice(0, -1);
+        }
+
+        var query = query();
+        var h = document.querySelector(".h");
+
+        setInterval(function(){
+            h.innerHTML = JSON.stringify(query);
+        }, 100);
+
+        wx.miniProgram.postMessage({ data: 'ccc' });
+        document.querySelector(".click").addEventListener("click", function(){
+            // window.location.href = url + search({from: 392819321});
+            // wx.miniProgram.switchTab({
+            //     url: "/pages/tabBar/my/my"
+            // });
+            wx.miniProgram.postMessage({ data: 'foo' });
+        },false);
+    </script>
 </body>
 </html>
